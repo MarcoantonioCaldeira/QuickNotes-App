@@ -10,7 +10,14 @@
         {{ anotation.category }}
         {{ anotation.term }}
         <button @click="editAnotation(anotation)">Editar</button>
-        <button v-on:click="deleteAnotation(anotation.id_anotation)">Excluir Anotação</button>
+        <button @click="OpenMessage()">Excluir Anotação</button>
+        
+        <div v-if="open_message">
+            <h2>Tem ceteza que deseja excluir a anotação</h2>
+            <button  class="btn_delete_anotation" v-on:click="deleteAnotation(anotation.id_anotation)">Sim</button>      
+        </div>
+
+        
       </li>
     </ul>
 
@@ -45,6 +52,7 @@ export default defineComponent({
     return{
       anotations: [],
       editMode: false,
+      open_message: false,
       editedAnotation:{
         subject: "",
         potential: "",
@@ -60,6 +68,11 @@ export default defineComponent({
   },
 
   methods: {
+
+  
+    OpenMessage(){
+      this.open_message = true;
+    },
 
     async getData(){
 
@@ -83,6 +96,10 @@ export default defineComponent({
     async editAnotation(anotation) { 
       this.editMode = true;
       this.editedAnotation = { ...anotation };
+    },
+
+    cancelEdit(){
+      this.editMode = false;
     },
 
     async updateAnotation() {
@@ -112,24 +129,24 @@ export default defineComponent({
     },
 
 
-    async deleteAnotation(id){
-        
-        try{
-  
-          const token = await getToken();
-          const headers = { Authorization: `Bearer ${token}` };
-  
-          const response = await api.delete(`/anotations/delete/${id}`, {headers });
-  
-          this.anotations = this.anotations.filter(anotation => anotation.id_anotation !== id)
+    async deleteAnotation(id) {
+      try {
+        const token = await getToken();
+        const headers = { Authorization: `Bearer ${token}` };
 
-          return response.data; 
-  
-        }catch(error){
-          console.log(error);
-          alert("Erro ao deletar a anotação");
-        };  
+        const response = await api.delete(`/anotations/delete/${id}`, {headers});
+
+        this.anotations = this.anotations.filter(anotation => anotation.id_anotation !== id);
+
+        this.$router.push({ name: 'Index' });  // Movido para cá
+
+        return response.data;
+
+      } catch (error) {
+        console.log(error);
+        alert("Erro ao deletar a anotação");
       }
+    }
 
 
 
