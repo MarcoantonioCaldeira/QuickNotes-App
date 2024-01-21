@@ -1,30 +1,38 @@
 <template>
 
-    <h1>seja bem-vindo ao QuickNotes</h1>
+    <h2>Seja bem-vindo ao QuickNotes</h2>
 
-    <h2>Criar nova anotações</h2>
-
-    <button v-on:click="OpenForm">Criar nova anotaçao</button>
+    <button  class="btn_create_new"  v-on:click="OpenForm">Nova anotação</button>
 
     <div class="form" v-if="open_form">
 
-        <textarea v-model="subject"  placeholder="Conteudo"></textarea>
-        <input  v-model="potential" placeholder="Potencial de Negocio">
-        <select v-model="category">
-            <option value="0">Pouco importate</option>
-            <option value="1">Importante</option>
-            <option value="2">Muito importante</option>
-        </select>
-        <input  v-model="term" type="text" placeholder="Data">
-        <button v-on:click="submitForm">Salvar</button>
-        
+        <div class="form-content">
+
+            <i @click="closeForm" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
+
+            <textarea v-model="subject"  placeholder="Sua anotação"></textarea>
+            <input  v-model="potential" placeholder="Potencial de Negocio">
+
+            <select v-model="category">
+                <option value="0">Pouco importate</option>
+                <option value="1">Importante</option>
+                <option value="2">Muito importante</option>
+            </select>
+            
+            <input  v-model="term" type="text" placeholder="Data">
+            <button  class="btn_salvar"  v-on:click="submitForm">Salvar</button>
+
+        </div>
+
     </div>
+   
 
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 import api, { getToken } from '@/services/api';
+import '@fortawesome/fontawesome-free/css/all.css'
 
     export default defineComponent({
         name: 'Index',
@@ -42,6 +50,10 @@ import api, { getToken } from '@/services/api';
         methods:{
             OpenForm(){
                 this.open_form = true;
+            },
+
+            closeForm(){
+                this.open_form = false;
             },
 
 
@@ -80,3 +92,5 @@ import api, { getToken } from '@/services/api';
 
 
 </script>
+
+<style src="./style.scss"  lang="scss" />

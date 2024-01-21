@@ -1,0 +1,126 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+h2, h3{
+    font-family: 'Poppins', sans-serif;
+    margin-left: 60px;
+    margin-top: 40px;
+}
+
+
+.btn_create_new{
+    width:160px;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid #1F177E;
+    text-decoration: none;
+    font-weight: 300;
+    background-color: #1F177E;
+    color:#ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size:20px;
+    margin-left: 60px;
+    margin-top: 10px;
+}
+
+
+
+.form{ 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    padding-top: 60px;
+
+
+    #fa-solid-li{
+        //display: inline-block;
+        color:#9B9A9A;
+        margin-left: 22pc;
+    }
+      
+    .form-content{
+        width: 400px;
+        height: 600px;
+        background-color: rgb(184, 184, 184);
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        border-radius: 10px;
+    
+        textarea{
+            width: 370px;
+            margin-top: 50px;
+            padding: 30px 20px;
+            background-color: rgb(160, 159, 159);
+            border-radius: 10px;
+            border: 1.5px solid rgb(160, 159, 159);
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+    
+    
+        input{
+            width: 370px;
+            margin-top: 50px;
+            padding: 15px 20px;
+            background-color: rgb(160, 159, 159);
+            border-radius: 10px;
+            box-sizing: border-box;
+            border: 1.5px solid rgb(160, 159, 159);
+        }
+    
+        select{
+            width: 370px;
+            margin-top: 50px;
+            padding: 15px 20px;
+            background-color: rgb(160, 159, 159);
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+            border: 1.5px solid rgb(160, 159, 159);
+        }
+    
+        .btn_salvar{
+            width:150px;
+            height: 60px;
+            border-radius: 10px;
+            border: 1px solid #1F177E;
+            background-color: #1F177E;
+            color:#ffffff;
+            font-weight: 300;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            font-size:20px;
+            margin-top: 40px;
+        }
+    }
+    
+    .form-content::-webkit-scrollbar-track{
+        border-radius:0;
+        background-color: #D0D4CE;
+    }
+    
+    .form-content::-webkit-scrollbar{
+        width: 10px;
+        background-color: #D0D4CE;
+    }
+    
+    .form-content::-webkit-scrollbar-thumb{
+        border-radius:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #71806B;
+    }
+}
+
+
+
