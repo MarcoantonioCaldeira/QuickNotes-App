@@ -12,29 +12,50 @@
           </div>
 
           <h3>{{ anotation.subject }}</h3>
-          <!-- {{ anotation.potential }}
-          {{ anotation.category }}
-          {{ anotation.term }} -->
+          <h4>Valor potencial: {{ anotation.potential }}</h4>
+          <h4>Categoria: {{ anotation.category }}</h4>
+          <h4>Data: {{ anotation.term }}</h4>
 
-          <div v-if="anotation.showDeleteConfirmation">
-            <h2>Tem certeza que deseja excluir a anotação</h2>
-            <button class="btn_delete_anotation" @click="deleteAnotation(anotation.id_anotation)">Sim</button>
+
+          <div class="form_cancel" v-if="anotation.showDeleteConfirmation">
+            <div class="form_content_cancel" style="height: 400px;">
+
+              <i style="margin-top: -120px;"  @click="cancelDeletion" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
+
+              <h2>Tem certeza que deseja excluir a anotação</h2>
+              <button class="btn_delete_anotation" @click="deleteAnotation(anotation.id_anotation)">Sim</button>
+
+            </div>          
           </div>
+          
         </div>
       
     </div>
 
-    <div v-if="editMode">
-      <h2>Editar Anotação</h2>
-      <form @submit.prevent="updateAnotation">
-        <textarea v-model="editedAnotation.subject"></textarea>
-        <textarea v-model="editedAnotation.potential"></textarea>
-        <textarea v-model="editedAnotation.category"></textarea>
-        <textarea v-model="editedAnotation.term"></textarea>
-        <button type="submit">Salvar</button>
-        <button @click="cancelEdit">Cancelar</button>
-      </form>
+    <div class="form_edit"  v-if="editMode">
+
+      <div class="form-content-edit">
+
+        <i @click="cancelEdit" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
+  
+          <textarea v-model="editedAnotation.subject"></textarea>
+          <input type="number"  v-model="editedAnotation.potential" />
+
+          <select v-model="editedAnotation.category">
+              <option value="0">Pouco importate</option>
+              <option value="1">Importante</option>
+              <option value="2">Muito importante</option>
+          </select>
+          
+          <input type="text"  v-model="editedAnotation.term" />
+
+          <button v-on:click="updateAnotation" class="btn_save_edition" type="submit">Salvar</button>
+
+      </div>
+
     </div>
+
+
   </div>
 </template>
 
@@ -50,6 +71,7 @@ export default defineComponent({
     return {
       anotations: [],
       editMode: false,
+      category: "",
       selectedAnotation: { showDeleteConfirmation: false },
       editedAnotation: {
         subject: "",
@@ -65,6 +87,7 @@ export default defineComponent({
   },
 
   methods: {
+
     OpenMessage(anotation) {
      this.selectedAnotation = anotation;
       this.selectedAnotation.showDeleteConfirmation = true;
@@ -79,6 +102,21 @@ export default defineComponent({
         const response = await api.get('/anotations/list', { headers });
 
         this.anotations = response.data.map(anotation => ({ ...anotation, showDeleteConfirmation: false }));
+
+        this.anotations.forEach(anotation => {
+
+          if (anotation.category === "0") {
+            anotation.category = "Pouco Importante";
+
+          } else if (anotation.category === "1") {
+            anotation.category = "Importante";
+
+          } else if (anotation.category === "2") {
+            anotation.category = "Muito Importante";
+
+          } 
+
+        });
 
       } catch (error) {
         console.error(error);
@@ -95,19 +133,28 @@ export default defineComponent({
       this.editMode = false;
     },
 
+    cancelDeletion() {
+      this.selectedAnotation.showDeleteConfirmation = false;
+    },
+
     async updateAnotation() {
       try {
+      
+        const { showDeleteConfirmation, ...dataToSend } = this.editedAnotation;
+
         const token = await getToken();
         const headers = { Authorization: `Bearer ${token}` };
 
-        const response = await api.patch(`/anotations/update/${this.editedAnotation.id_anotation}`, this.editedAnotation, { headers });
+        const response = await api.patch(`/anotations/update/${dataToSend.id_anotation}`, dataToSend, { headers });
         console.log(response.data);
-        
+
         alert('Anotação atualizada com sucesso!');
 
         this.editMode = false;
 
+        // Limpe os dados após a atualização
         this.editedAnotation = {
+          id_anotation: "",
           subject: "",
           potential: "",
           category: "",
@@ -115,14 +162,13 @@ export default defineComponent({
         };
 
         this.getData();
-
       } catch (error) {
-
         console.error(error);
         alert('Erro ao atualizar a anotação');
-
       }
     },
+
+
 
     async deleteAnotation(id) {
       try {

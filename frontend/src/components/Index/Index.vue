@@ -1,8 +1,14 @@
 <template>
 
-    <h2>Seja bem-vindo ao QuickNotes</h2>
+    <div class="content">
 
-    <button  class="btn_create_new"  v-on:click="OpenForm">Nova anotação</button>
+        <h2>Seja bem-vindo ao QuickNotes</h2>
+
+        <button  class="btn_create_new"  v-on:click="OpenForm">Criar anotação</button>
+
+    </div>
+
+   
 
     <div class="form" v-if="open_form">
 
@@ -74,8 +80,6 @@ import '@fortawesome/fontawesome-free/css/all.css'
                     const response = await api.post('/anotations/create/', data, {headers})     
 
                     console.log(response.data);
-
-                    alert("Anotação criada com sucesso");
 
                     this.open_form = false;
                     this.subject = "";
