@@ -1,3 +1,6 @@
+@import "../../global-styleds/colors.scss";
+
+
 *{
     padding: 0;
     margin: 0;
@@ -6,9 +9,13 @@
 
 
 h1{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     margin-left: 60px;
     margin-top: 40px;
+    //font-weight: 800;
+    font-size: 30px;
+    
+    color: #202020;
 
     @media(max-width: 768px){
         display: flex;
@@ -25,24 +32,32 @@ h1{
     margin: auto;
     align-items: center;
     flex-direction: column;
+    min-height: 800px;
+
 
 
    
         .Content{
             list-style-type: none;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Nunito', sans-serif;
             font-weight: 600;
             margin-top: 70px;
             margin-bottom: 10px;
             border-radius: 10px;
             border-color:  #0000001a;
             border: 1px solid  #0000001a;
-            width: 600px;
-            height: 100px;
+            width: 700px;
+            height: 120px;
+
+            
 
             h3{
-                margin-top: 25px;
+                margin-top: 30px;
                 margin-left: 7px;
+            }
+
+            p{
+                font-family: 'Nunito', sans-serif;
             }
 
             h4{
@@ -60,7 +75,7 @@ h1{
                 display: inline;
                 float: right;
                 height: 100%;
-                transform: translateY(20%);
+                transform: translateY(10%);
 
 
                 i{
@@ -98,28 +113,37 @@ h1{
 
     #fa-solid-li{
         //display: inline-block;
-        color:#9B9A9A;
+        color:$color_tree;
         margin-left: 22pc;
     }
       
     .form-content-edit, .form_content_cancel{
         width: 400px;
         height: 600px;
-        background-color: rgb(214, 214, 214);
+        background-color: $color_five;
         display: flex;
         flex-direction: column; 
         align-items: center;
         justify-content: center;
         margin: auto;
         border-radius: 10px;
+
+        label{
+            position: absolute;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            margin-left: -290px;
+            margin-top: 22px;
+        }
+    
     
         textarea{
             width: 370px;
             margin-top: 50px;
             padding: 30px 20px;
-            background-color: rgb(187, 187, 187);
+            background-color: $color_four;
             border-radius: 10px;
-            border: 1.5px solid rgb(187, 187, 187);
+            border: 1.5px solid $color_four;
             box-sizing: border-box;
             font-family: 'Nunito', sans-serif;
         }
@@ -129,29 +153,33 @@ h1{
             width: 370px;
             margin-top: 50px;
             padding: 15px 20px;
-            background-color: rgb(187, 187, 187);
+            background-color: $color_four;
             border-radius: 10px;
             box-sizing: border-box;
-            border: 1.5px solid rgb(187, 187, 187);
+            border: 1.5px solid $color_four;
+        }
+
+        input[type=number]::-webkit-inner-spin-button { 
+            -webkit-appearance: none;         
         }
     
         select{
             width: 370px;
             margin-top: 50px;
             padding: 15px 20px;
-            background-color: rgb(187, 187, 187);
+            background-color: $color_four;
             border-radius: 10px;
             box-sizing: border-box;
             font-family: 'Nunito', sans-serif;
-            border: 1.5px solid rgb(187, 187, 187);
+            border: 1.5px solid $color_four;
         }
     
         .btn_save_edition, .btn_delete_anotation{
             width:150px;
             height: 60px;
             border-radius: 10px;
-            border: 1px solid #11e26f;
-            background-color: #11e26f;
+            border: 1px solid $color_two;
+            background-color: $color_two;
             color:#ffffff;
             font-weight: 300;
             font-family: 'Nunito', sans-serif;
@@ -159,20 +187,28 @@ h1{
             font-size:20px;
             margin-top: 40px;
         }
-
-        @media(max-width: 768px){
-           background-color: #ffffff;
-        }
     }
 
     @media(max-width: 768px){
         width: 100%;
         height: auto;
-        // align-content: center;
-        // align-items: center;
-        margin-top: 50px;
         margin-bottom: 50px;
     }
+
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+      }
+      
+      @-webkit-keyframes animatezoom {
+        from {-webkit-transform: scale(0)} 
+        to {-webkit-transform: scale(1)}
+      }
+        
+      @keyframes animatezoom {
+        from {transform: scale(0)} 
+        to {transform: scale(1)}
+      }
 }
 
 

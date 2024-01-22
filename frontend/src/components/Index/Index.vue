@@ -12,7 +12,7 @@
 
     <div class="form" v-if="open_form">
 
-        <div class="form-content">
+        <div class="form-content animate">
 
             <i @click="closeForm" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
 
@@ -25,7 +25,7 @@
                 <option value="2">Muito importante</option>
             </select>
             
-            <input  v-model="term" type="text" placeholder="Data">
+            <input  v-model="term" type="date">
             <button  class="btn_salvar"  v-on:click="submitForm">Salvar</button>
 
         </div>

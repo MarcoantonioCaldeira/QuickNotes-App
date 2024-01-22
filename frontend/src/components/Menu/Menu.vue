@@ -1,6 +1,6 @@
 <template>
 
-    <header class="menu" :class="{ 'scrolled-nav': scrolledNav }" v-if="!isComponenteAAtivo">
+    <header :class="{ 'scrolled-nav': scrolledNav }" v-if="!isComponenteAAtivo">
 
         <nav>
             <div class="branding">
@@ -18,16 +18,14 @@
                 </span> 
             </div>
 
-            <transition v-show="mobileNav" class="mobile-nav">
-
+            <transition name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
                     <div class="responsive_branding">
                         <img  class="responsive_logo"  src="../../assets/img/logo.png">
                     </div>
                     <li><router-link class="link" to="/">Inicio</router-link></li>
                     <li><router-link class="link" to="/dashboard">Minhas anotações</router-link></li>
-                </ul>
-                
+                </ul>    
             </transition>   
         </nav>
     </header>

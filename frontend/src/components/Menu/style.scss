@@ -9,7 +9,6 @@ header{
     height: 70px;
     border-bottom: 1px solid #0000001a;
     z-index: 209;
-    transition: 0.5s ease all;
 
   .logo{
      width: 200px;
@@ -24,7 +23,6 @@ header{
     padding: 13px 0;
     width: 80%;
     margin: 0 auto;
-    transition: 0.5s ease all;
 
     @media (min-width: 1140px) {
       max-width: 1140px;
@@ -32,7 +30,8 @@ header{
   
     ul, .link {
       font-family: 'Nunito', sans-serif;
-      font-weight: 800;
+      
+      font-weight: 1000;
       color: #202020;
       list-style: none;
       text-decoration: none;
@@ -90,10 +89,6 @@ header{
           transition: 0.8s ease all;
         }
       }
-  
-      .icon-active{
-        transform: rotate(180deg);
-      }
 
       .scrolled-nav{
         box-shadow: 0 4px 6px -1px;
@@ -121,13 +116,13 @@ header{
         }
       }
   
-      .mobile-nav-enter-active, .mobile-nav-leave-active{
+      .mobile-nav-enter-active,.mobile-nav-leave-active{
         transition: 1s ease all;
         z-index: 200;
       }
   
   
-      .mobile-nav-enter-from, .mobile-nav-leave-to{
+      .mobile-nav-enter-from,.mobile-nav-leave-to{
         transform: translateX(-250px);
       }
   
