@@ -1,6 +1,6 @@
 <template>
 
-    <header :class="{ 'scrolled-nav': scrolledNav }" v-if="!isComponenteAAtivo">
+    <header :class="{ 'scrolled-nav': scrolledNav, 'dark-mode': isDarkMode }" v-if="!isComponenteAAtivo">
 
         <nav>
             <div class="branding">
@@ -10,6 +10,7 @@
             <ul  v-show="!mobile" class="navigation">
                 <li><router-link  class="link" to="/">Inicio</router-link></li>
                 <li><router-link  class="link" to="/dashboard">Minhas anotações</router-link></li>
+             
             </ul>
 
             <div class="icon">
@@ -25,6 +26,7 @@
                     </div>
                     <li><router-link class="link" to="/">Inicio</router-link></li>
                     <li><router-link class="link" to="/dashboard">Minhas anotações</router-link></li>
+               
                 </ul>    
             </transition>   
         </nav>
@@ -35,6 +37,7 @@
 <script>
 import { defineComponent } from 'vue';
 import '@fortawesome/fontawesome-free/css/all.css'
+import { Component, Vue } from 'vue-property-decorator';
 
 export default defineComponent({
     name: 'Menu',
@@ -45,8 +48,12 @@ export default defineComponent({
             mobile: null,
             mobileNav: null,
             windowWidth: null,
+            isDarkMode: false,
+            scrolledNav: false,
+            mobileNav: false,
         }
     },
+
 
     created(){
         window.addEventListener("resize", this.checkScreen);
@@ -58,7 +65,7 @@ export default defineComponent({
     }, 
 
     methods:{
-
+        
         toggleMobileNav(){
             this.mobileNav = !this.mobileNav;
         },

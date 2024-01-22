@@ -1,109 +1,33 @@
-@import "../../global-styleds/colors.scss";
 @import "../../global-styleds/fonts.scss";
+@import "../../global-styleds/colors.scss";
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
-div.dark-mode {
-    background-color: #1a1a1a; /* Cor de fundo para o tema dark */
-    color: #ffffff; /* Cor do texto para o tema dark */
-    /* Adicione mais estilos conforme necessário */
-  }
-
-h1{
+.btn_create_new{
+    width:180px;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid $color_two;
+    text-decoration: none;
+    font-weight: 300;
+    background-color: $color_two;
+    color:$color_six;
     font-family: $font;
+    font-weight: 600;
+    font-size:20px;
     margin-left: 60px;
-    margin-top: 40px;
-    //font-weight: 800;
-    font-size: 30px;
-    color: $color_one;
+    margin-top: 10px;
+
+    .fa-solid{
+        margin-left: 5px;
+    }
 
     @media(max-width: 768px){
-        display: flex;
-        align-items: center;
-        margin: auto;
-        flex-direction: column;
-        padding-top: 70px;
+        margin-left: 0px;
     }
 }
 
 
-.AllContent{
-    display: flex;
-    margin: auto;
-    align-items: center;
-    flex-direction: column;
-    min-height: 800px;
-
-
-
-   
-        .Content{
-            list-style-type: none;
-            font-family: $font;
-            font-weight: 600;
-            margin-top: 70px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            border-color:  #0000001a;
-            border: 1px solid  #0000001a;
-            width: 700px;
-            height: 120px;
-
-            
-
-            h3{
-                margin-top: 30px;
-                margin-left: 7px;
-            }
-
-            p{
-                font-family: $font;
-            }
-
-            h4{
-                display: inline-block;
-                margin: 10px;
-                margin-left: 6px;
-            }
-
-            h2{
-                text-align: center; 
-                margin-left: 0;
-            }
-
-            .actions{
-                display: inline;
-                float: right;
-                height: 100%;
-                transform: translateY(10%);
-
-
-                i{
-                    display: block;
-                    margin-right: 10px;
-                    margin-top: 10px;
-                }
-            }
-
-
-            @media(max-width: 768px){
-                width: 300px;
-                height: auto;
-                margin-top: 50px;
-                margin-bottom: 50px;
-            }
-        } 
-
-    
-}
-
-
-
-.form_edit, .form_cancel{ 
+.form{ 
     position: fixed; 
     z-index: 1; 
     left: 0;
@@ -116,12 +40,11 @@ h1{
 
 
     #fa-solid-li{
-        //display: inline-block;
-        color:$color_tree;
+        color:#9B9A9A;
         margin-left: 22pc;
     }
       
-    .form-content-edit, .form_content_cancel{
+    .form-content{
         width: 400px;
         height: 600px;
         background-color: $color_five;
@@ -132,6 +55,7 @@ h1{
         margin: auto;
         border-radius: 10px;
 
+        
         label{
             position: absolute;
             font-family: $font;
@@ -139,7 +63,6 @@ h1{
             margin-left: -290px;
             margin-top: 22px;
         }
-    
     
         textarea{
             width: 370px;
@@ -162,10 +85,6 @@ h1{
             box-sizing: border-box;
             border: 1.5px solid $color_four;
         }
-
-        input[type=number]::-webkit-inner-spin-button { 
-            -webkit-appearance: none;         
-        }
     
         select{
             width: 370px;
@@ -178,24 +97,29 @@ h1{
             border: 1.5px solid $color_four;
         }
     
-        .btn_save_edition, .btn_delete_anotation{
+        .btn_salvar{
             width:150px;
             height: 60px;
             border-radius: 10px;
             border: 1px solid $color_two;
             background-color: $color_two;
-            color:color_six;
+            color:$color_six;
             font-weight: 300;
             font-family: $font;
             font-weight: 600;
             font-size:20px;
             margin-top: 40px;
+
+           
         }
     }
 
     @media(max-width: 768px){
         width: 100%;
         height: auto;
+        // align-content: center;
+        // align-items: center;
+        margin-top: 50px;
         margin-bottom: 50px;
     }
 
@@ -214,9 +138,6 @@ h1{
         to {transform: scale(1)}
       }
 }
-
-
-
 
 
 

@@ -1,3 +1,5 @@
+@import "../../global-styleds/colors.scss";
+
 *{
     padding: 0;
     margin: 0;
@@ -9,5 +11,5 @@
     height: 300px;
     width: 100%;
     margin-top: 120px;
-    background-color: #11e26f;
+    background-color: $color_two;
 }

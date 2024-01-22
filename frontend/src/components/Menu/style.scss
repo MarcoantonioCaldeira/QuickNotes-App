@@ -1,6 +1,16 @@
+@import "../../global-styleds/colors.scss";
+@import "../../global-styleds/fonts.scss";
+
+
 * {
     margin: 0;
     padding: 0;
+}
+
+header.dark-mode {
+  background-color: #1a1a1a; /* Cor de fundo para o tema dark */
+  color: #ffffff; /* Cor do texto para o tema dark */
+  /* Adicione mais estilos conforme necessário */
 }
   
 
@@ -9,6 +19,8 @@ header{
     height: 70px;
     border-bottom: 1px solid #0000001a;
     z-index: 209;
+
+
 
   .logo{
      width: 200px;
@@ -29,10 +41,10 @@ header{
     }
   
     ul, .link {
-      font-family: 'Nunito', sans-serif;
+      font-family: $font;
       
       font-weight: 1000;
-      color: #202020;
+      color: $color_one;
       list-style: none;
       text-decoration: none;
 
@@ -83,7 +95,7 @@ header{
         height: 90px;
   
         i {
-          color: black;
+          color: $color_one;
           cursor: pointer;
           font-size: 24px;
           transition: 0.8s ease all;
@@ -97,7 +109,7 @@ header{
       .dropdown-nav{
         z-index: 200;
         display: flex;
-        background-color: white;
+        background-color: $color_six;
         flex-direction: column;
         box-shadow: 0 4px 6px -1px;
         position: fixed;
@@ -109,9 +121,9 @@ header{
            
         li{
           text-decoration: none;
-          font-family: 'Nunito', sans-serif;
+          font-family: $font;
           .link{
-            color: black;
+            color: $color_one;
           }
         }
       }

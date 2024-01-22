@@ -33,6 +33,8 @@
           </div>
 
         </div>
+
+      <ButtonCreateAnotation  :name="name"/>
       
     </div>
 
@@ -70,9 +72,13 @@ import api, { getToken } from '@/services/api';
 import { defineComponent } from 'vue';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { formatData, formatMoney } from '../../masks/masks.ts';
+import ButtonCreateAnotation from '@/components/Button/ButtonCreateAnotation.vue';
 
 export default defineComponent({
   name: 'Dashboard',
+  components: {
+    ButtonCreateAnotation,
+  },
 
   data() {
     return {
@@ -80,6 +86,7 @@ export default defineComponent({
       editMode: false,
       category: "",
       selectedAnotation: { showDeleteConfirmation: false },
+      name: "Nova anotação",
 
       editedAnotation: {
         subject: "",
