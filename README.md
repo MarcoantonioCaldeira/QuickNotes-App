@@ -1,12 +1,12 @@
 # AnotationApp
-> O AnotationApp é uma Aplicação para criar anotações
-# Tecnologias Usadas
+> O AnotationApp é uma Aplicação para criar, atualizar e deletar anotações
 
+## Tecnologias Usadas
   + FrontEnd
     + VueJS
     + Sass
     + Axios
-    + Design Resposivo
+    + Design Responsivo
     + Consumo de RestAPI
   + Backend
     + NestJS
@@ -35,7 +35,7 @@
 ## Modelo de requisições e respostas da API
 
 ### Gerar Token de Autenticação
-+ Para gerar o token de autenticação temos que passar a **secretKey** com o valor: **3G5T8W7Y1K**
++ Para gerar o token de autenticação temos que passar os parametros no Header **secretKey** com o valor: **3G5T8W7Y1K**
 
   #### Endpoint: localhost:3000/auth/token
   
@@ -47,7 +47,7 @@
 
 ### Criar anotação
 
-#### Endpoint: localhost:3000/anotations/create
+#### **Endpoint: localhost:3000/anotations/create**
 
 #### Modelo de Requisição
 
@@ -74,7 +74,7 @@
 
 ### Deletar anotação
 
-#### Endpoint: localhost:3000/anotations/delete/id_anotation
+#### **Endpoint: localhost:3000/anotations/delete/id_anotation**
 
 #### Modelo de Resposta
 
@@ -91,7 +91,7 @@
 
 ### Listar anotações
 
-#### Endpoint: localhost:3000/anotations/list
+#### **Endpoint: localhost:3000/anotations/list**
 
 #### Modelo de Resposta
 
@@ -125,6 +125,33 @@
     		"term": "02/02/2022"
     	}
     ]
+
+
+### Atualizar anotações
+
+#### **Endpoint: localhost:3000/anotations/update/id_anotation**
+
+#### Modelo de Requisição
+
+      {
+        "subject": "Anotações", 
+        "potential": 4500,  
+        "category": "2",
+        "term": "25/01/2024"    
+      }
+
+#### Modelo de Resposta
+
+    {
+    	"message": "Anotação atualizada com sucesso",
+    	"anotation": {
+    		"id_anotation": 6,
+    		"subject": "Neste dia vou estar ocupadoo",
+    		"potential": 4500,
+    		"category": "2",
+    		"term": "25/01/2024"
+    	}
+    }
 
 ## Funcionalidades Adicionais
 
