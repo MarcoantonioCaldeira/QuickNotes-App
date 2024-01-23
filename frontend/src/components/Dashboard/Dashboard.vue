@@ -1,43 +1,48 @@
 <template>
+  <!-- Dashboard que exibe todas as anotações -->
   <div class="Inicio">
     
     <h1>Anotações</h1>
 
     <div class="AllContent">
       
-        <div class="Content"  v-for="anotation in anotations" :key="anotation.id_anotation">
+      <div class="Content"  v-for="anotation in anotations" :key="anotation.id_anotation">
 
 
-          <div class="actions">
-            <i @click="toggleFavorite(anotation)" :id="'star-icon-' + anotation.id_anotation" class="fa-solid fa-star"></i>
-            <i @click="editAnotation(anotation)" class="fa-solid fa-pen-to-square"></i>
-            <i @click="OpenMessage(anotation)" class="fa-solid fa-trash-can"></i>
-          </div>
+        <div class="actions">
+          <i @click="toggleFavorite(anotation)" :id="'star-icon-' + anotation.id_anotation" class="fa-solid fa-star"></i>
+          <i @click="editAnotation(anotation)" class="fa-solid fa-pen-to-square"></i>
+          <i @click="OpenMessage(anotation)" class="fa-solid fa-trash-can"></i>
+        </div>
 
-          <h3>{{ anotation.subject }}</h3>
-          <h4>Valor potencial: {{ anotation.potential }}</h4>
-          <h4>Categoria: {{ anotation.category }}</h4>
-          <h4>Data: {{ anotation.term }}</h4>
+        <h3>{{ anotation.subject }}</h3>
+        <h4>Valor potencial: {{ anotation.potential }}</h4>
+        <h4>Categoria: {{ anotation.category }}</h4>
+        <h4>Data: {{ anotation.term }}</h4>
 
 
-          <div class="form_cancel" v-if="anotation.showDeleteConfirmation">
-            <div class="form_content_cancel animate" style="height: 400px;">
+        <div class="form_cancel" v-if="anotation.showDeleteConfirmation">
+          <div class="form_content_cancel animate" style="height: 400px;">
 
-              <i style="margin-top: -120px;"  @click="cancelDeletion" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
+            <i style="margin-top: -120px;"  @click="cancelDeletion" id="fa-solid-li"  class="fa-solid fa-circle-xmark"></i>
 
-              <h2>Tem certeza que deseja excluir a anotação</h2>
-              <button class="btn_delete_anotation" @click="deleteAnotation(anotation.id_anotation)">Sim</button>
-
-            </div>
+            <h2>Tem certeza que deseja excluir a anotação</h2>
+            <button class="btn_delete_anotation" @click="deleteAnotation(anotation.id_anotation)">Sim</button>
 
           </div>
 
         </div>
 
-      <ButtonCreateAnotation  :name="name"/>
-      
+      </div>
+
+      <div class="Btn_Add_Area" style="margin-left: -60px;">
+        <ButtonCreateAnotation :name="name"/>
+      </div>
+     
+ 
     </div>
 
+    <!-- Formualrio de Edição -->
     <div class="form_edit"  v-if="editMode">
 
       <div class="form-content-edit animate">
@@ -63,13 +68,12 @@
 
     </div>
 
-
   </div>
 </template>
 
 <script>
-import api, { getToken } from '@/services/api';
 import { defineComponent } from 'vue';
+import api, { getToken } from '@/services/api';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { formatData, formatMoney } from '../../masks/masks.ts';
 import ButtonCreateAnotation from '@/components/Button/ButtonCreateAnotation.vue';
@@ -82,33 +86,29 @@ export default defineComponent({
 
   data() {
     return {
-      anotations: [  { isFavorite: false, /* outras propriedades */ },],
+      anotations: [{ isFavorite: false }],
       editMode: false,
       category: "",
       selectedAnotation: { showDeleteConfirmation: false },
       name: "Nova anotação",
-
       editedAnotation: {
         subject: "",
         potential: "",
         category: "",
         term: "",
-      },
-      
+      }
     };
   },
 
+  //Com o mounted, a função getData é chamada assim que a página é carregada
   mounted() {
     this.getData();
   },
 
   methods: {
 
-    OpenMessage(anotation) {
-     this.selectedAnotation = anotation;
-      this.selectedAnotation.showDeleteConfirmation = true;
-    },
 
+    //Função para buscar as anotações
     async getData() {
       try {
 
@@ -126,6 +126,7 @@ export default defineComponent({
           return importanciaB - importanciaA; 
         })
 
+        //Verificação do tipo de categoria e troca pela pelavra
         this.anotations.forEach(anotation => {
 
           if (anotation.category === "0") {
@@ -149,53 +150,56 @@ export default defineComponent({
 
 
 
+    //Função para editar a anotação
     async editAnotation(anotation) {
       this.editMode = true;
       this.editedAnotation = { ...anotation };
     },
 
+    //Controle de exibição do modal de edição
     cancelEdit() {
       this.editMode = false;
     },
 
+    //Função que vai enviar os dados editados para a api
+    async updateAnotation() {
+      try {
+      
+        const { showDeleteConfirmation, ...dataToSend } = this.editedAnotation;
+    
+        const token = await getToken();
+        const headers = { Authorization: `Bearer ${token}` };
+      
+        const response = await api.patch(`/anotations/update/${dataToSend.id_anotation}`, dataToSend, { headers });
+        console.log(response.data);
+
+        this.editMode = false;
+
+        this.editedAnotation = {
+          id_anotation: "",
+          subject: "",
+          potential: "",
+          category: "",
+          term: "",
+        };
+
+        this.getData();
+      } catch (error) {
+        console.error(error);
+        alert('Erro ao atualizar a anotação');
+      }
+    },
+
+    //Função para abrir o modal de confirmação de exclusão
+    OpenMessage(anotation) {
+      this.selectedAnotation = anotation;
+      this.selectedAnotation.showDeleteConfirmation = true;
+    },
+
+    //Função para fechar o modal de confirmação de exclusão
     cancelDeletion() {
       this.selectedAnotation.showDeleteConfirmation = false;
     },
-
-
-    async updateAnotation() {
-    try {
-    
-      const { showDeleteConfirmation, ...dataToSend } = this.editedAnotation;
-
-  
-      const token = await getToken();
-      const headers = { Authorization: `Bearer ${token}` };
-
-     
-      const response = await api.patch(`/anotations/update/${dataToSend.id_anotation}`, dataToSend, { headers });
-      console.log(response.data);
-
-      alert('Anotação atualizada com sucesso!');
-
-      this.editMode = false;
-
-   
-      this.editedAnotation = {
-        id_anotation: "",
-        subject: "",
-        potential: "",
-        category: "",
-        term: "",
-      };
-
-      this.getData();
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao atualizar a anotação');
-    }
-  },
-
 
 
     async deleteAnotation(id) {
@@ -217,11 +221,14 @@ export default defineComponent({
       }
     },
 
+    //Alterar a cor do icone quando for favorito
     toggleFavorite(anotation) {
       anotation.isFavorite = !anotation.isFavorite;
       const icon = document.getElementById(`star-icon-${anotation.id_anotation}`);
       icon.style.color = anotation.isFavorite ? "#FFD700" : "black";
     }
+
+
 
 
   }

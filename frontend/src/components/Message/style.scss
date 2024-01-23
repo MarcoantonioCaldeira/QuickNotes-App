@@ -1,0 +1,20 @@
+@import "../../global-styleds/colors.scss";
+@import "../../global-styleds/fonts.scss";
+
+
+.message-container{
+    position: fixed;
+    width: 270px;
+    height: 50px;
+    top: 90%;
+    right: 180px;
+    font-family: $font;
+    font-weight: 800;
+ 
+    background-color: $color_two; 
+    color: #fff; 
+    padding: 10px;
+    border-radius: 15px;
+    opacity: 70%;
+    z-index: 1000; 
+}

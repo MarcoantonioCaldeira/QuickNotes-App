@@ -1,12 +1,13 @@
 <template>
-
+    
     <div class="content">
 
-        <h2>Seja bem-vindo ao QuickNotes</h2>
+        <h2>Seja bem-vindo!!!</h2>
 
         <ButtonCreateAnotation :name="name"/>
 
     </div>
+    
 </template>
 
 <script>

@@ -1,7 +1,10 @@
 <template>
+
      <button  class="btn_create_new"  v-on:click="OpenForm">{{ name }} <i class="fa-solid fa-plus"></i></button>
 
+     <Message :msg="msg" v-show="msg"  :scrolledDown="scrolledDown"/>
 
+     <!-- Formulario para criação de anotações -->
      <div class="form" v-if="open_form">
 
         <div class="form-content animate">
@@ -24,17 +27,17 @@
         </div>
     </div>
 
-
 </template>
 
 <script>
 import api, { getToken } from '@/services/api';
 import '@fortawesome/fontawesome-free/css/all.css';
+import Message from '@/components/Message/message.vue';
 
 export default{
     name: 'ButtonCreateAnotation',
-    props: {
-        name: String
+    components: {
+        Message
     },
 
     data() {
@@ -43,12 +46,27 @@ export default{
             subject: "",
             potential: "",
             category: "",
-            term: "",
+            term: "",  
+            msg: '',
+            scrolledDown: false,
         }
     },
 
+    props: {
+        name: String
+    },
+
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.handleScroll);
+    },
 
     methods:{
+
+        //Metodos para abrir e fechar o formulário
         OpenForm(){
             this.open_form = true;
         },
@@ -57,11 +75,12 @@ export default{
             this.open_form = false;
         },
 
-
+        //Metodo principal para envio do formulário
         async submitForm(){
 
             try{
 
+                //Obtenção do Token de autenticação
                 const token = await getToken();
                 const headers = { Authorization: `Bearer ${token}` };
 
@@ -76,16 +95,36 @@ export default{
 
                 console.log(response.data);
 
+                //Exibição da mesagem
+                this.msg = "Anotação criada com sucesso!!!";
+                setTimeout(() => this.msg = "", 2000)
+
+                //Fechando o formulário
                 this.open_form = false;
                 this.subject = "";
                 this.potential = "";
                 this.category = "";
                 this.term = "";
 
+
             }catch(error){
                 console.log(error);
             }
-        }
+        },
+
+        //Metodo para esconder o componente de mensagem quando o usuário rolar para baixo
+        handleScroll() {
+
+            const scrollPosition = window.scrollY || window.pageYOffset;
+
+            if (scrollPosition > 0 && !this.scrolledDown) {
+                
+                this.scrolledDown = true;
+                this.msg = ""; // Limpa a mensagem quando o usuário rolar para baixo
+            }
+        },
+
+
     }
 }
 
