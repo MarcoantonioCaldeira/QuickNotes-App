@@ -12,6 +12,7 @@ export class AnotationService {
   constructor(private readonly prisma: PrismaService) {}
 
   async insertNote(criateAnotationDto: CreateAnotationDto): Promise<{ message: string, anotation: Note }> {
+    
     const permittedCategory = ['0', '1', '2'];
 
     if (!permittedCategory.includes(criateAnotationDto.category)) {
@@ -22,7 +23,7 @@ export class AnotationService {
         const anotation = await this.prisma.note.create({
             data: {
                 subject: criateAnotationDto.subject,
-                potential: criateAnotationDto.potential, // Convertendo para string
+                potential: criateAnotationDto.potential,
                 category: criateAnotationDto.category,
                 term: criateAnotationDto.term,
             },
@@ -74,10 +75,6 @@ export class AnotationService {
   async updateAnotations(id_anotation: number, createAnotationDto: CreateAnotationDto): Promise<{ message: string, anotation: Note } | { message: string }> {
     const id = parseInt(id_anotation.toString(), 10);
   
-    if (typeof id !== 'number' || isNaN(id)) {
-      throw new BadRequestException('ID da anotação é inválido.');
-    }
-  
     const anotation = await this.prisma.note.findUnique({
       where: {
         id_anotation: id,
@@ -98,9 +95,7 @@ export class AnotationService {
       anotation: updatedAnotation,
     };
   }
-  
-  
-  
-  
 
 }
+
+

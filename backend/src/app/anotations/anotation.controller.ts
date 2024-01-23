@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, HttpException, HttpStatus, Delete, UseGuards, Param, BadRequestException, NotFoundException, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpException, HttpStatus, Delete, Param, Patch } from '@nestjs/common';
 import { AnotationService } from './anotation.service';
 import { CreateAnotationDto } from './dto/anotation.dto';
 import { Note } from 'prisma/src/db/generated/client';
@@ -14,8 +14,8 @@ export class AnotationController {
   @Get('list')
   async findAnotation(): Promise<Note[]> {
     try {
-      const todosPedidos = await this.anotationService.getAllAnotations();
-      return todosPedidos;
+      const todasAnotacoes = await this.anotationService.getAllAnotations();
+      return todasAnotacoes;
     } catch (error) {
       throw new HttpException(error.message, error.status || HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -53,7 +53,7 @@ export class AnotationController {
   async updateAnotation(@Param('id_anotation') id_anotation: number, @Body() createAnotationDto: CreateAnotationDto): Promise<{ message: string, anotation?: Note } | { message: string }> {
     try {
       const response: { message: string, anotation?: Note } = await this.anotationService.updateAnotations(id_anotation, createAnotationDto);
-      const { anotation, message } = response;
+      const { anotation} = response;
       return {
         message: 'Anotação atualizada com sucesso',
         anotation: anotation as Note,

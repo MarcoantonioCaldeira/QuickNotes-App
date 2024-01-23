@@ -16,6 +16,6 @@ import { AuthMiddleware } from './auth/auth.mddleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('anotations'); // Aplica o middleware aos endpoints desejados
+    consumer.apply(AuthMiddleware).forRoutes('anotations'); 
   }
 }

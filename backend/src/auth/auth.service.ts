@@ -12,6 +12,6 @@ export class AuthService {
       secretKey: keyToUse,
     };
 
-    return jwt.sign(payload, keyToUse, { expiresIn: '1h' }); // Token válido por 1 hora
+    return jwt.sign(payload, keyToUse, { expiresIn: '1h' }); 
   }
 }

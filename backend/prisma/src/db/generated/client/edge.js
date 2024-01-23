@@ -120,7 +120,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\calde\\Documents\\Parte do backend\\backend\\prisma\\src\\db\\generated\\client",
+      "value": "C:\\Users\\calde\\Documents\\Projeto para a Empresa SpeedIO\\backend\\prisma\\src\\db\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
