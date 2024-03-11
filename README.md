@@ -1,6 +1,9 @@
 # AnotationApp
 > O AnotationApp é uma Aplicação para criar, atualizar e deletar anotações
 
+## Visão Geral da aplicação
+![Anotaçao](https://github.com/MarcoantonioCaldeira/Anotation-App/assets/88919003/7f007ccd-0c93-4223-b05f-59a92655f9ec)
+
 ## Tecnologias Usadas
   + FrontEnd
     + VueJS
@@ -160,5 +163,4 @@
   + Atualização automatica de Token de autenticação no FrontEnd
   + Utilização do Docker para empacotar as duas aplicações
     
-## Visão Geral da aplicação
-![Anotaçao](https://github.com/MarcoantonioCaldeira/Anotation-App/assets/88919003/7f007ccd-0c93-4223-b05f-59a92655f9ec)
+
