@@ -1,5 +1,5 @@
-# AnotationApp
-> O AnotationApp é uma Aplicação para criar, atualizar e deletar anotações
+# QuickNotes-App
+> O QuickNotes-App é uma Aplicação para criar, atualizar e deletar anotações
 
 ## Visão Geral da aplicação
 ![Anotaçao](https://github.com/MarcoantonioCaldeira/Anotation-App/assets/88919003/7f007ccd-0c93-4223-b05f-59a92655f9ec)
